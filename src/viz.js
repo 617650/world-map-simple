@@ -19,11 +19,12 @@ export const viz = (container, { state, setState }) => {
     // * undefined
     // * 'LOADING'
     // * An array of objects
-    const { data } = state;
+    const { data, rotation } = state;
 
     if (data && data !== 'LOADING') {
         svg.call(map, {
-            data
+            data,
+            rotation
         });
     }
 

@@ -12,11 +12,13 @@ npm i
 npx webpack serve
 ```
 
+
 Simple, zero-configuration command-line HTTP server
 
 ```bash
 npx http-server
 ```
+
 
 Runs the start script defined in your package.json file
 
@@ -31,6 +33,7 @@ Run it again after installing new dependencies, making changes to source files, 
 ```bash
 npx webpack
 ```
+
 
 Enabling watch mode to automatically rebuilds your bundle when it detects changes to your files.
 
