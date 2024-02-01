@@ -1,4 +1,4 @@
-import { csvParse, select } from 'd3';
+import { select } from 'd3';
 import { feature } from 'topojson-client';
 import { map } from './map';
 
@@ -19,31 +19,49 @@ export const viz = (container, { state, setState }) => {
     // * undefined
     // * 'LOADING'
     // * An array of objects
-    const { data, rotation } = state;
+    const { datasets, rotation } = state;
 
-    if (data && data !== 'LOADING') {
+    if (datasets && datasets.worldAtlasData !== 'LOADING' && datasets.supplyChainData !== 'LOADING') {
         svg.call(map, {
-            data,
+            worldAtlasData: datasets.worldAtlasData,
+            supplyChainData: datasets.supplyChainData,
             rotation
         });
     }
 
-    if (data === undefined) {
+    if (datasets === undefined) {
         setState((state) => ({
             ...state,
-            data: 'LOADING',
+            datasets: {
+                worldAtlasData: 'LOADING',
+                supplyChainData: 'LOADING',
+            },
         }));
         fetch(worldAtlasURL)
             .then((response) => response.json())
             .then((topoJSONData) => {
-                const data = feature(
+                const worldAtlasData = feature(
                     topoJSONData,
                     'countries'
                 );
-                console.log(data);
                 setState((state) => ({
                     ...state,
-                    data,
+                    datasets: {
+                        ...state.datasets,
+                        worldAtlasData,
+                    },
+                }));
+        });
+        fetch('./model/fake_supply_chain_data.json')
+            .then((response) => response.json())
+            .then((allSupplyChainData) => {
+                const supplyChainData = allSupplyChainData.slice(0, 60);
+                setState((state) => ({
+                    ...state,
+                    datasets: {
+                        ...state.datasets,
+                        supplyChainData,
+                    },
                 }));
         });
     }
