@@ -69,6 +69,7 @@ export const map = (selection, { worldAtlasData, supplyChainData, rotation }) =>
     });
 
     projection.rotate(rotation);
+    //console.log(rotation);
 
     updateSupplyChains(); 
 
@@ -77,58 +78,58 @@ export const map = (selection, { worldAtlasData, supplyChainData, rotation }) =>
     animateParticles(paths, particleContext);
 
     // Draw graticule
-    baseMapSvg
-      .selectAll('path.graticule')
-      .data([null])
-      .join('path')
-      .attr('class', 'graticule')
-      .attr('d', path(graticule()))
-      .attr('fill', 'none')
-      .attr('stroke', '#fff')
-      .attr('opacity', 0.2)
-      .attr('stroke-width', 0.5);
+    // baseMapSvg
+    //   .selectAll('path.graticule')
+    //   .data([null])
+    //   .join('path')
+    //   .attr('class', 'graticule')
+    //   .attr('d', path(graticule()))
+    //   .attr('fill', 'none')
+    //   .attr('stroke', '#fff')
+    //   .attr('opacity', 0.2)
+    //   .attr('stroke-width', 0.5);
   
-    // Draw globe
-    baseMapSvg
-      .selectAll('globe.outline')
-      .data([globeOutline])
-      .join('path')
-      .attr('class', 'outline')
-      .attr('d', path)  
-      .attr('fill', '#63A0A4')
-      .attr('stroke', '#63A0A4')
-      .attr('stroke-width', 2)
-      .attr('opacity', 0.2);
+    // // Draw globe
+    // baseMapSvg
+    //   .selectAll('globe.outline')
+    //   .data([globeOutline])
+    //   .join('path')
+    //   .attr('class', 'outline')
+    //   .attr('d', path)  
+    //   .attr('fill', '#63A0A4')
+    //   .attr('stroke', '#63A0A4')
+    //   .attr('stroke-width', 2)
+    //   .attr('opacity', 0.2);
   
-    // Draw land
-    baseMapSvg
-      .selectAll('path.country')
-      .data(worldAtlasData.features)
-      .join('path')
-      .attr('d', path)
-      .attr('class', 'country')
-      .attr('fill', '#fff')
-      .attr('stroke', '#fff')
-      .attr('opacity', 0.3)
-      .attr('stroke-width', 0);
+    // // Draw land
+    // baseMapSvg
+    //   .selectAll('path.country')
+    //   .data(worldAtlasData.features)
+    //   .join('path')
+    //   .attr('d', path)
+    //   .attr('class', 'country')
+    //   .attr('fill', '#fff')
+    //   .attr('stroke', '#fff')
+    //   .attr('opacity', 0.3)
+    //   .attr('stroke-width', 0);
 
-    // Draw supply chain lines
-    baseMapSvg
-      .selectAll('path.supply-chain')
-      .data(supplyChainData)
-      .enter()
-      .append('path')
-      .attr('class', 'supply-chain')
-      .attr('d', d => {
-        const link = {
-          type: "LineString",
-          coordinates: [d.depart, d.arrive]
-        };
-        return pathGenerator(link);
-      })
-      .attr('fill', 'none')
-      .attr('stroke', 'blue')
-      .attr('stroke-width', 2)
-      .attr('opacity', 0);
+    // // Draw supply chain lines
+    // baseMapSvg
+    //   .selectAll('path.supply-chain')
+    //   .data(supplyChainData)
+    //   .enter()
+    //   .append('path')
+    //   .attr('class', 'supply-chain')
+    //   .attr('d', d => {
+    //     const link = {
+    //       type: "LineString",
+    //       coordinates: [d.depart, d.arrive]
+    //     };
+    //     return pathGenerator(link);
+    //   })
+    //   .attr('fill', 'none')
+    //   .attr('stroke', 'blue')
+    //   .attr('stroke-width', 2)
+    //   .attr('opacity', 0);
   };
 

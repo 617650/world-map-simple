@@ -6,7 +6,7 @@ export class Particle {
         this.currentIndex = startIndex; // Current index in the coordinates array
         this.dragLength = 1; // Number of points to skip
         this.totalDistance = this.calculateTotalDistance(); // Total distance of the path
-        this.speed = 2; // Speed of the particle
+        this.speed = 1; // Speed of the particle
         this.radius = 1.5; // Size of the particle
     }
 
@@ -39,8 +39,12 @@ export class Particle {
 
         // Create a gradient for the particle stroke (glow effect)
         const gradient = this.context.createRadialGradient(currentPos[0], currentPos[1], 0, currentPos[0], currentPos[1], 3);
+        // Color #1
         gradient.addColorStop(0, 'rgba(115, 103, 255, 1)');  // Inner color
         gradient.addColorStop(1, 'rgba(115, 103, 255, 0)');  // Outer color
+        // Color #2
+        gradient.addColorStop(0, 'rgba(255, 103, 103, 1)');  // Inner color
+        gradient.addColorStop(1, 'rgba(255, 103, 103, 0)');  // Outer color
 
         // Draw a line from the tail position to the current position
         this.context.beginPath();
@@ -53,8 +57,12 @@ export class Particle {
         // Draw the head of the particle
         this.context.beginPath();
         this.context.arc(currentPos[0], currentPos[1], 3, 0, Math.PI * 2);
+        // Color #1
         this.context.fillStyle = '#7367FF'; // Adjust color as needed
         this.context.shadowColor = '#7367FF'; // Shadow color (same as particle color for glow effect)
+        // Color #2
+        this.context.fillStyle = '#FF6767'; 
+        this.context.shadowColor = '#FF6767'; 
         this.context.shadowBlur = 5; // Glow effect size
         this.context.fill();
     }
@@ -73,6 +81,7 @@ export function animateParticles(paths, context){
     
     function animate() {
         context.fillStyle = 'rgba(255, 255, 255, 0.05)';
+        //context.fillStyle = 'rgba(0, 0, 0, 0.05)';
         context.fillRect(0, 0, context.canvas.width, context.canvas.height);
 
         particles.forEach(particle => {

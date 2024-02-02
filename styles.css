@@ -7,6 +7,7 @@ body {
     align-items: center;
     font-family: 'Manrope', sans-serif;
     overflow: hidden;
+    /* background: #343434; */
 }
 
 #app {

@@ -3,7 +3,7 @@ import { viz } from './viz';
 import '../styles.css';
 
 const container = select('#app').node();
-const rotation = [0, 0, 0];
+const rotation = [70, 318, 0];
 let state = { rotation };
 
 const render = () => {

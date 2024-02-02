@@ -55,7 +55,19 @@ export const viz = (container, { state, setState }) => {
         fetch('./model/fake_supply_chain_data.json')
             .then((response) => response.json())
             .then((allSupplyChainData) => {
+                // Function to shuffle the array
+                function shuffleArray(array) {
+                    for (let i = array.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [array[i], array[j]] = [array[j], array[i]];
+                    }
+                }
+        
+                // Shuffle the array
+                shuffleArray(allSupplyChainData);
+
                 const supplyChainData = allSupplyChainData.slice(0, 60);
+
                 setState((state) => ({
                     ...state,
                     datasets: {
